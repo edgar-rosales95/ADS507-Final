@@ -1,0 +1,14 @@
+- What to do with missing values?
+
+    - For the housing data, much of the missing data for the date columns is because data wasn't available in that city for those years.
+      So still keep it?  Would need to make sure to allow NULL values for those SQL columns
+
+    - Metro data also has a lot of missing, would it be possible to impute the proper metro?  Look at how Zillow defines Metro and 
+      maybe from there we'll get an idea of why they're missing.  Doesn't make sense to delete those rows or columns so maybe just
+      put none or make it the same as the county
+    
+- How to handle the dates in the housing data?  Most of the columns are M/DD/YYYY format.  They're also float now, so would need to be changed
+
+- Rent data starts at 2015.  So cut off all other data to that date?  Or leave it?
+
+- Actual County name in the wildfire data is FIPS_NAME, COUNTY is just a code
