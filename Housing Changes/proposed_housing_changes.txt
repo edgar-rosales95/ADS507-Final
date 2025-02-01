@@ -1,0 +1,3 @@
+This is true for all housing data since columns are the same 
+
+- Drop 'RegionType' and 'StateName'

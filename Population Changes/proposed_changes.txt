@@ -1,0 +1,13 @@
+True for all population data sets
+
+- Drop the following...
+  ['SUMLEV', 'PLACE', 'COUSUB', 'CONCIT', 'ESTIMATESBASE2010', 'POPESTIMATE2010']
+
+  SUMLEV looks like some statistical code, not sure what PLACE is, COUSUB and CONCIT are all 0, and the 2010 population ones
+  seem redundant since they're estimates, and there is already a feature for the actual 2010 Census
+
+- FUNCSTAT and COUNTY
+
+Don't drop FUNCSTAT yet since not sure what it is and could be useful, and COUNTY is the official county code, that could be useful
+for connecting the other datasets to this one
+
