@@ -1,0 +1,33 @@
+- I'm thinking 4 tables so far...one contains housing data, one for rental data, one for population estimates, another for the 
+  wildfire data
+  - For states, is it better to combine?  Or each state be it's own table?
+  - I think we can drop all data for wildfire for at least prior to 2000
+  - I think we combine the housing data (keep rental and housing separate) and add a code for top-tier and bottom-tier housing
+
+- For connecting state and housing data, the relevant columns are going to be (PLACE, COUNTY, NAME) and (State, Metro, CountyName),
+  so connect one of those?  Or line up the COUNTY code and use that as the Primary/Foreign key?  It'll be the same with the Rent data
+
+- For states, some of the columns we can drop are State and Stname since each CSV is dedicated to one state
+
+- For housing data, State and StateName appear to be the same, so we can drop one of those
+
+- State data, COUSUB and CONSIT are all 0's so can probs drop
+
+- For states, PLACE is zip code
+
+- Lot of columns can be dropped in the wildfire data.  
+
+- Wildfire data has a feature DISCOVERY_DATE, dtype is int, maybe use that to connect other tables...though I think it would have to be 
+  MM/YYYY format since the actual day could be any for wildfires while census data is yearly and housing data is end of month
+
+- FOD or FPA ID in wildfire data uniquely identifies each fire...keep those as primary key and could aggreagate by county or place?
+
+- Actual County name in the wildfire data is FIPS_NAME, COUNTY is just a code, but maybe use the code to match up with population?
+
+- Kaggle api brings in the wildfire data, zillow is all public so we'll put the CSV's in the main file and provide the link
+  in the README and same with population data
+<<<<<<< HEAD
+=======
+
+- We'll need to make sure when sending all this to a SQL database to allow NULL values since we'll have mmissing data for counties for certain years
+>>>>>>> 740ab47bf555154d5de3c44a963a92e3fae4d6c1

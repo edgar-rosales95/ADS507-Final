@@ -1,0 +1,22 @@
+- Drop the following columns...
+
+'Shape', 'FOD_ID', 'FPA_ID', 'SOURCE_SYSTEM_TYPE', 'SOURCE_SYSTEM', 'NWCG_REPORTING_AGENCY', 
+'NWCG_REPORTING_UNIT_ID','NWCG_REPORTING_UNIT_NAME', 'SOURCE_REPORTING_UNIT', 'SOURCE_REPORTING_UNIT_NAME', 'LOCAL_FIRE_REPORT_ID', 
+'LOCAL_INCIDENT_ID', 'FIRE_CODE', 'ICS_209_PLUS_INCIDENT_JOIN_ID', 'ICS_209_PLUS_COMPLEX_JOIN_ID', 'MTBS_ID', 'MTBS_FIRE_NAME', 
+'COMPLEX_NAME', 'FIRE_YEAR', 'DISCOVERY_DOY', 'DISCOVERY_TIME', 'NWCG_CAUSE_AGE_CATEGORY', 'CONT_DATE', 'CONT_DOY', 
+'CONT_TIME', 'FIPS_CODE'
+
+- Remove all rows prior to the year 2000 since none of the other datasets have records prior to then.  Resulting DF has 11 
+  columns and 1,653,153 records
+
+- Also drop COUNTY...mixture of string and numerical values, and some overlap.  for instance, COUNTY value 63.0 is a code for a county in CA and in MT
+  Instead use FIPS_NAME for COUNTY
+
+- Rename the following...
+
+  "NWCG_CAUSE_CLASSIFICATION": "CAUSE_CLASSIFICATION" 
+  "NWCG_GENERAL_CAUSE": "SPECIFIC_CAUSE" 
+  "OWNER_DESCR": "RESPONSIBLE_ENTITY" 
+  "FIPS_NAME": "COUNTY"
+
+- Spoke too soon.  There are a lot of missing county names, however we can convert the LAT/LONG coordinates into a county name and fill them in, so don't drop them yet

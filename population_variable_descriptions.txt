@@ -1,0 +1,7 @@
+SUMLEV : Geographic Summary Level 
+
+STATE : State FIPS code
+COUNTY : County FIPS code 
+STNAME : State Name 
+CTYNAME : County
+
