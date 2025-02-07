@@ -26,3 +26,8 @@
 
 - Kaggle api brings in the wildfire data, zillow is all public so we'll put the CSV's in the main file and provide the link
   in the README and same with population data
+<<<<<<< HEAD
+=======
+
+- We'll need to make sure when sending all this to a SQL database to allow NULL values since we'll have mmissing data for counties for certain years
+>>>>>>> 740ab47bf555154d5de3c44a963a92e3fae4d6c1
