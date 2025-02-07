@@ -2,6 +2,7 @@
   wildfire data
   - For states, is it better to combine?  Or each state be it's own table?
   - I think we can drop all data for wildfire for at least prior to 2000
+  - I think we combine the housing data (keep rental and housing separate) and add a code for top-tier and bottom-tier housing
 
 - For connecting state and housing data, the relevant columns are going to be (PLACE, COUNTY, NAME) and (State, Metro, CountyName),
   so connect one of those?  Or line up the COUNTY code and use that as the Primary/Foreign key?  It'll be the same with the Rent data
@@ -22,3 +23,8 @@
 - FOD or FPA ID in wildfire data uniquely identifies each fire...keep those as primary key and could aggreagate by county or place?
 
 - Actual County name in the wildfire data is FIPS_NAME, COUNTY is just a code, but maybe use the code to match up with population?
+
+- Kaggle api brings in the wildfire data, zillow is all public so we'll put the CSV's in the main file and provide the link
+  in the README and same with population data
+
+- We'll need to make sure when sending all this to a SQL database to allow NULL values since we'll have mmissing data for counties for certain years
