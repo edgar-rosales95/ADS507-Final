@@ -6,6 +6,7 @@
   - Maybe split the housing data into two tables, rent_index and housing_prices, and then store the cities into one
       - And that means we can also have a Wildfire Table and Population Table.  So the city/state info can be the main
         table the rest are connected to
+  - We can use FIPS code for state, county and place as Primary/Foreign keys
 
 - For connecting state and housing data, the relevant columns are going to be (PLACE, COUNTY, NAME) and (State, Metro, CountyName),
   so connect one of those?  Or line up the COUNTY code and use that as the Primary/Foreign key?  It'll be the same with the Rent data
@@ -15,13 +16,6 @@
 - For housing data, State and StateName appear to be the same, so we can drop one of those
 
 - State data, COUSUB and CONSIT are all 0's so can probs drop
-
-- For states, PLACE is zip code
-
-- Lot of columns can be dropped in the wildfire data.  
-
-- Wildfire data has a feature DISCOVERY_DATE, dtype is int, maybe use that to connect other tables...though I think it would have to be 
-  MM/YYYY format since the actual day could be any for wildfires while census data is yearly and housing data is end of month
 
 - FOD or FPA ID in wildfire data uniquely identifies each fire...keep those as primary key and could aggreagate by county or place?
 
@@ -35,3 +29,7 @@
 - Add code in the main branch to handle missing COUNTY values?
 
 - Any other data types we need to convert?
+
+- In the wildfire data, the FIPS_CODE we can use because that's the official county codes, however we'll need to reformat it since they're
+  incorrect in the data.  For example, the county codes for CA are 60.. however it's combinging the FIPS state and county codes, but CA is
+  06.  
