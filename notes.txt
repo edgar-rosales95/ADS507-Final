@@ -2,3 +2,4 @@ Notes so I don't forget
 
 - Check and make sure RegionID is unique and how it relates to the other values, I think that'll be the primary key for housing and rent
 - Drop RegionName, RegionType, Metro
+- Combine STATE, COUNTY and PLACE codes (STATE-COUNTY-PLACE) in population data as Primary key for population table
