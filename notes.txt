@@ -1,9 +1,10 @@
 **Notes so I don't forget**
 
 Housing/Rental
+    - Might need to reformat price data, not sure if it will do that automatically upon loading
+    - Keep state name?
+    - Rename any of the other columns?
 
-    - Check and make sure RegionID is unique and how it relates to the other values, I think that'll be the primary key for housing and rent
-    - Drop RegionName, RegionType, Metro
 
 
 Population
@@ -11,3 +12,13 @@ Population
 
 
 Wildfire
+    - Need to adjust State and/or Place code
+
+
+
+Loading into SQL
+    - How to write the code so this can be updated properly each month?
+
+
+Places Table
+    - Use state_id as primary key to connect the housing/rental/wildfire tables?

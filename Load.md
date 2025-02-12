@@ -10,8 +10,8 @@ CREATE DATABASE IF NOT EXISTS wildfire_housing
 
 ```sql
 CREATE TABLE IF NOT EXISTS places (
-    place_id int FOREIGN KEY, --This will reference the combined STATE-COUNTY-PLACE code from population data
-    state_id int FOREIGN KEY, -- This will be the FIPS State Code
+    place_id int FOREIGN KEY, --This will reference the combined STATE-COUNTY-PLACE code from population data 
+    state_id int FOREIGN KEY, -- This will be the FIPS State Code.  Make this primary key instead? 
     state_name CHAR(2),
     county_code int FOREIGN KEY, -- This will be the FIPS County Code.
     county_name VARCHAR(20),
@@ -42,23 +42,26 @@ CREATE TABLE IF NOT EXISTS wildfire (
 
 ```sql
 CREATE TABLE IF NOT EXISTS housing (
-    region_id int PRIMARY KEY, --use this as Primary key?  I think we'll need it since each record will have a bunch of dates and prices
-    state CHAR(2),
+    PRICE_ID INT AUTO_INCREMENT PRIMARY KEY, --Auto_incrementing for each new record since a new one will be added each month with updated price
+    State_ID CHAR(2) NOT NULL, --Will need to make this a foreign_key
+    region_name VARCHAR(40), 
     county_name VARCHAR(20),
     eval_date date, --this will be the date the housing price was assessed
-    price DECIMAL(10, 2),
-    size_rank
+    price DECIMAL(10, 2)
 );
-
---I think it's best to combine all housing data, not sure what value separating bottom and top is anymore, maybe still include size rank and for data processing we'll need to pivot long the price values and date features
 ```
 
 # Create Rentals Table
 
 ```sql
 CREATE TABLE IF NOT EXISTS rentals (
-
-)
+    RENT_ID INT AUTO_INCREMENT PRIMARY KEY,
+    STATE_ID CHAR(2) NOT NULL,
+    region_name VARCHAR(40),
+    county_name VARCHAR(40),
+    eval_date DATE,
+    price DECIMAL (10,2)
+);
 ```
 
 
