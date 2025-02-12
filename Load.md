@@ -10,7 +10,7 @@ CREATE DATABASE IF NOT EXISTS wildfire_housing
 
 ```sql
 CREATE TABLE IF NOT EXISTS places (
-    place_id int PRIMARY KEY AUTO INCREMENT, --This will be for each unique place or FIPS Place Code
+    place_id int FOREIGN KEY, --This will reference the combined STATE-COUNTY-PLACE code from population data
     state_id int FOREIGN KEY, -- This will be the FIPS State Code
     state_name CHAR(2),
     county_code int FOREIGN KEY, -- This will be the FIPS County Code.
@@ -52,3 +52,20 @@ CREATE TABLE IF NOT EXISTS housing (
 
 --I think it's best to combine all housing data, not sure what value separating bottom and top is anymore, maybe still include size rank and for data processing we'll need to pivot long the price values and date features
 ```
+
+# Create Rentals Table
+
+```sql
+CREATE TABLE IF NOT EXISTS rentals (
+
+)
+```
+
+
+
+# Create Population Table
+
+```sql
+CREATE TABLE IF NOT EXISTS population (
+    places_id int PRIMARY KEY,
+)
