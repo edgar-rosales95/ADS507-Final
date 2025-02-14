@@ -9,16 +9,17 @@ CREATE DATABASE IF NOT EXISTS wildfire_housing
 # Create places table
 
 ```sql
-CREATE TABLE IF NOT EXISTS places (
-    place_id int FOREIGN KEY, --This will reference the combined STATE-COUNTY-PLACE code from population data 
-    state_id int FOREIGN KEY, -- This will be the FIPS State Code.  Make this primary key instead? 
-    state_name CHAR(2),
-    county_code int FOREIGN KEY, -- This will be the FIPS County Code.
-    county_name VARCHAR(20),
-    place_name VARCHAR(20)
+CREATE TABLE IF NOT EXISTS locations (
+    location_id INT AUTO_INCREMENT PRIMARY KEY,  -- Unique identifier for locations
+    state_name CHAR(2) NOT NULL,
+    state_id INT NOT NULL,
+    county_id INT NOT NULL,
+    county_name VARCHAR(40),
+    places_id INT NOT NULL,
+    place_name VARCHAR(50),                      -- City/Town/Village Name
+    UNIQUE (state_id, county_name, place_name)    -- Prevents duplicate locations
 );
 
--- Not sure yet how to fully organize this.  We don't have places for all columns so maybe make state and county a composite and places a foreign key
 ```
 
 # Create Wildfire table
@@ -26,15 +27,15 @@ CREATE TABLE IF NOT EXISTS places (
 ```sql
 CREATE TABLE IF NOT EXISTS wildfire (
     object_id int PRIMARY KEY, -- included with the wildfire data
+    location_id INT NOT NULL,
     fire_name VARCHAR(20), --Lot of unknowns in this feature and a lot of repeats (like 'Grass fire') better to just delete?
     discovery_date date,
     cause VARCHAR(20), --we have two, one that's general and one specific, probably will just keep one
-    state CHAR(2),
-    state_id int FOREIGN KEY,
-    county_name VARCHAR(20)
+    state_id INT, --foreign key
+    state_name CHAR(2),
+    county_name VARCHAR(20),
+    FOREIGN KEY (location_id) REFERENCES locations(location_id)
 );
-
---we can use county and state id codes but necessary?
 ```
 
 
@@ -42,12 +43,15 @@ CREATE TABLE IF NOT EXISTS wildfire (
 
 ```sql
 CREATE TABLE IF NOT EXISTS housing (
-    PRICE_ID INT AUTO_INCREMENT PRIMARY KEY, --Auto_incrementing for each new record since a new one will be added each month with updated price
-    State_ID CHAR(2) NOT NULL, --Will need to make this a foreign_key
+    price_id INT AUTO_INCREMENT PRIMARY KEY, --Auto_incrementing for each new record since a new one will be added each month with updated price
+    location_id INT NOT NULL,
+    state_id INT NOT NULL, --Will need to make this a foreign_key
+    state_name CHAR(2) NOT NULL, --Redundant?
     region_name VARCHAR(40), 
     county_name VARCHAR(20),
     eval_date date, --this will be the date the housing price was assessed
-    price DECIMAL(10, 2)
+    price DECIMAL(10, 2),
+    FOREIGN KEY (location_id) REFERENCES locations(location_id)
 );
 ```
 
@@ -55,12 +59,15 @@ CREATE TABLE IF NOT EXISTS housing (
 
 ```sql
 CREATE TABLE IF NOT EXISTS rentals (
-    RENT_ID INT AUTO_INCREMENT PRIMARY KEY,
-    STATE_ID CHAR(2) NOT NULL,
+    rent_id INT AUTO_INCREMENT PRIMARY KEY,
+    location_id INT NOT NULL,
+    state_id INT NOT NULL, --Will need this to be a foreign key
+    state_name CHAR(2) NOT NULL,
     region_name VARCHAR(40),
     county_name VARCHAR(40),
     eval_date DATE,
-    price DECIMAL (10,2)
+    price DECIMAL (10,2),
+    FOREIGN KEY (location_id) REFERENCES locations(location_id)
 );
 ```
 
@@ -69,6 +76,20 @@ CREATE TABLE IF NOT EXISTS rentals (
 # Create Population Table
 
 ```sql
-CREATE TABLE IF NOT EXISTS population (
-    places_id int PRIMARY KEY,
-)
+CREATE TABLE IF NOT EXISTS census_data (
+    places_id INT PRIMARY KEY,
+    location_id INT NOT NULL,
+    county_name VARCHAR(40),
+    census_2010 INT CHECK (census_2010 >= 0), --need to make sure the A values get ignored or replaced with Null
+    pop_estimate_2011 INT,
+    pop_estimate_2012 INT,
+    pop_estimate_2013 INT,
+    pop_estimate_2014 INT,
+    pop_estimate_2015 INT,
+    pop_estimate_2016 INT,
+    pop_estimate_2017 INT,
+    pop_estimate_2018 INT,
+    pop_estimate_2019 INT,
+    FOREIGN KEY (location_id) REFERENCES locations(location_id)
+);
+```
