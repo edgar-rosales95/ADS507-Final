@@ -32,7 +32,8 @@ CREATE TABLE IF NOT EXISTS housing (
     region_name VARCHAR(50),
     assessment_date DATE,
     price DECIMAL(10, 2),
-    FOREIGN KEY (state_id, county_id) REFERENCES locations(state_id, county_id)
+    FOREIGN KEY (state_id, county_id) REFERENCES locations(state_id, county_id),
+    UNIQUE (state_id, county_id, region_name, assessment_date, price)
 );
 
 CREATE TABLE IF NOT EXISTS rentals (
@@ -44,7 +45,8 @@ CREATE TABLE IF NOT EXISTS rentals (
     region_name VARCHAR(50),
     assessment_date DATE,
     price DECIMAL(10, 2),
-    FOREIGN KEY (state_id, county_id) REFERENCES locations(state_id, county_id)
+    FOREIGN KEY (state_id, county_id) REFERENCES locations(state_id, county_id),
+    UNIQUE (state_id, county_id, region_name, assessment_date, price)
 );
 
 CREATE TABLE IF NOT EXISTS census (
