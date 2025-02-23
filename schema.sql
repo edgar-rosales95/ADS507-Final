@@ -1,14 +1,3 @@
-**Page for SQL code to load into database**
-
-# Create Database
-
-```sql
-CREATE DATABASE IF NOT EXISTS wildfire_housing
-```
-
-# Create locations table
-
-```sql
 CREATE TABLE IF NOT EXISTS locations (
     state_id INT NOT NULL,
     county_id INT NOT NULL DEFAULT 0,
@@ -20,11 +9,7 @@ CREATE TABLE IF NOT EXISTS locations (
     UNIQUE (state_id, county_id, place_name)
 );
 
-```
 
-# Create Wildfire table
-
-```sql
 CREATE TABLE IF NOT EXISTS wildfire (
     fire_id INT PRIMARY KEY,
     state_id INT NOT NULL,
@@ -38,12 +23,6 @@ CREATE TABLE IF NOT EXISTS wildfire (
     FOREIGN KEY (state_id, county_id) REFERENCES locations(state_id, county_id)
 );
 
-```
-
-
-# Create Housing Table
-
-```sql
 CREATE TABLE IF NOT EXISTS housing (
     price_id INT AUTO_INCREMENT PRIMARY KEY,
     state_id INT NOT NULL,
@@ -56,11 +35,6 @@ CREATE TABLE IF NOT EXISTS housing (
     FOREIGN KEY (state_id, county_id) REFERENCES locations(state_id, county_id)
 );
 
-```
-
-# Create Rentals Table
-
-```sql
 CREATE TABLE IF NOT EXISTS rentals (
     rent_price_id INT AUTO_INCREMENT PRIMARY KEY,
     state_id INT NOT NULL,
@@ -72,13 +46,7 @@ CREATE TABLE IF NOT EXISTS rentals (
     price DECIMAL(10, 2),
     FOREIGN KEY (state_id, county_id) REFERENCES locations(state_id, county_id)
 );
-```
 
-
-
-# Create Population Table
-
-```sql
 CREATE TABLE IF NOT EXISTS census (
     state_id INT NOT NULL,
     county_id INT NOT NULL,
@@ -96,4 +64,3 @@ CREATE TABLE IF NOT EXISTS census (
     FOREIGN KEY (state_id, county_id, place_id) REFERENCES locations(state_id, county_id, place_id),
     UNIQUE (state_id, county_id, place_id)
 );
-```
