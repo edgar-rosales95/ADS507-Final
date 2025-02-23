@@ -3,6 +3,7 @@ from mysql.connector import Error
 import os
 from dotenv import load_dotenv
 
+##### This is to connect to wildfire_housing database #####
 
 # Database credentials (replace with your details)
 load_dotenv()

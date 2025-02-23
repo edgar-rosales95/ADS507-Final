@@ -1,3 +1,6 @@
+--Schema had too many overlaps so simplified redesign is in main folder.  This database till exists on same server
+
+
 CREATE TABLE IF NOT EXISTS locations (
     state_id INT NOT NULL,
     county_id INT NOT NULL DEFAULT 0,

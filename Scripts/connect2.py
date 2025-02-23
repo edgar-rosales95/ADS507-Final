@@ -4,6 +4,8 @@ import os
 from dotenv import load_dotenv
 
 
+##### This to connect to the simplified wildfire_watch database #####
+
 # Database credentials (replace with your details)
 load_dotenv()
 
