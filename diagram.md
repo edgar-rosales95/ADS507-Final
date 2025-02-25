@@ -1,4 +1,5 @@
 ```mermaid
+
 graph TD;
 
   %% Data Sources
@@ -29,7 +30,7 @@ graph TD;
   M -->|Final Processed Data| N[Store in Public Azure MySQL Database];
 
   %% Pipeline Development & Version Control
-  O[Pipeline Code in Python (Jupyter Notebooks)] --> P[GitHub Repo];
+  O[Pipeline Code - Python & Jupyter] --> P[GitHub Repo];
 
   %% Data Consumers
   N -->|Public Database Access| Q[Geckoboard Dashboards];
