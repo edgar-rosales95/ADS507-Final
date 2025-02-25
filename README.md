@@ -5,7 +5,10 @@
 ### Table of Contents
 
 - [Description](#description)
+- [Setup&Reproducibility](#Setup&Reproducibility)
+- [Deployment Process](#deployment)
 - [Monitoring](#monitoring)
+- [Technologies](#technologies)
 - [License](#license)
 
 ---
@@ -19,13 +22,25 @@ To achieve this, we source data from:
 - Zillow: Home sales and rental prices by city.
 - Census Data: Year-over-year population changes in high-risk wildfire states.
 
+# Setup & Reproducibility 
+
+This project is designed to be fully reproducible from the GitHub repository. Follow these steps to set up the pipeline locally:
+
+## clone Repository
+
+git clone https://github.com/edgar-rosales95/ADS507-Final
+
+## Set up Virtual Environment
+
+pip install -r requirements.txt
+
 # Deployment
 
 The extraction phase involves retrieving raw data from multiple sources and loading it into Pandas DataFrames for preprocessing. The primary dataset for wildfire records is sourced from Kaggle's U.S. Wildfire Records dataset, which includes details such as fire name, discovery date, cause, size, and location. The pipeline uses the Kaggle API via the kagglehub library to automate data retrieval, storing the extracted data in a Pandas DataFrame with key columns like FIRE_NAME, DISCOVERY_DATE, NWCG_GENERAL_CAUSE, FIRE_SIZE, STATE, and FIPS_NAME. This API-based approach ensures data accuracy and facilitates updates when new wildfire data is released.
 
 Once extracted, the raw data undergoes cleaning and transformation to ensure consistency and relevance. The dataset is filtered to include only wildfire records from heavily impacted states—California, Texas, Georgia, Florida, and Arizona—while excluding records outside these regions and those predating the year 2000. The DISCOVERY_DATE column is standardized into a datetime format, and additional steps like renaming columns, removing duplicates, and standardizing categorical variables (e.g., fire causes) are applied to enhance data quality. The cleaned dataset is then loaded into an Azure-hosted MySQL database using MySQL Connector and SQLAlchemy, with secure authentication ensuring data integrity. The transformed data is stored in a dedicated table named *wildfires*, structured with attributes like fire_id, fire_name, discovery_date, fire_size, state, and zip_code, enabling seamless integration with housing and population data for future analysis.
 
---- 
+---
 
 # Monitoring
 
@@ -37,6 +52,8 @@ By storing the dataset in Azure MySQL, the system enables scalability, accessibi
 
 - SQL
 - Python
+- Tableau
+- Azure
 
 [Back To The Top](#ADS507-Final)
 
@@ -66,3 +83,4 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 [Back To The Top](#ADS507-Final)
+
